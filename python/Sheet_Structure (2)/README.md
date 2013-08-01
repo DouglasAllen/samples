@@ -57,6 +57,7 @@ Betty is running a fundraising bakesale and needs to track her project status an
 
 	header = "Content-Type", " application/json"
 
+	Call = SmartsheetAPI(baseURL, token)
 	createSheet = Call._raw_request('/sheets', header, sheet) # Create sheet
 	createSheetResp = json.loads(Call.resp)
 	sheet_id = createSheetResp['result']['id']
