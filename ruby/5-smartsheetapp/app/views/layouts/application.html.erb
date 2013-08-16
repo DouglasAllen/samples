@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smartsheetapp</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<table width=50%>
+  <tr>
+    <td style="align:left">SMARTSHEETAPP</td>
+    <td style="align:right">
+      <% if logged_in? %>
+        <%= session[:smartsheet_email] %> |
+        <%= link_to 'my sheets', sheets_path %> |
+        <%= link_to 'log out', session_path, :method => :delete %>
+      <% else %>
+        not logged in to Smartsheet | 
+        <%= link_to 'log in to Smartsheet', '/auth/smartsheet' %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<hr>
+<h1>SmartsheetApp: HelloWorld Third-Party Smartsheet App</h1>
+
+<%= yield %>
+
+</body>
+</html>
