@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "View Sheets";   
+}
+<a href="/HelloSmartsheet/Logout">Logout</a>
+<br />
+<h2>Sheets for
+    @if (ViewBag.fName.Length > 0 && ViewBag.lName.Length > 0)
+    {
+        <span>@ViewBag.fName</span>
+        <span>@ViewBag.lname</span>
+        <span>(@ViewBag.email)</span>
+        <span>:</span>
+    }
+    else
+    {
+        <span>@ViewBag.email</span>
+        <span>:</span>
+    }
+    </h2>
+
+<table>
+    <tr><th>Sheet Name</th>
+        <th>Sheet ID</th>
+        <th>Access Level</th>
+    </tr>
+@if(ViewBag.jsonResponse.Length > 0)
+{
+       for (int i = 0; i < ViewBag.jsonResponse.Length;i++)
+{
+           <tr><td>@(i+1)
+    .&nbsp;
+    @ViewBag.jsonResponse[i]["name"]
+               &nbsp;
+               </td>
+               <td>@ViewBag.jsonResponse[i]["id"]
+                   &nbsp;
+               </td>
+               <td>@ViewBag.jsonResponse[i]["accessLevel"]</td>
+    </tr>
+}
+}
+else
+{
+ <tr><td colspan ="3">No sheets here.</td></tr>
+}
+    </table>

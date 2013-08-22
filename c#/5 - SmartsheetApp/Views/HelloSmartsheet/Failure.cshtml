@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Error";
+}
+<br />
+@if(ViewBag.error == null)
+{
+    <span>An error has occurred.</span>
+    <br />
+    <a href="/Home">Try again.</a>
+}
+
+else
+{
+ @ViewBag.error  
+    <br />
+    <a href="/Home">Try again.</a>
+}
