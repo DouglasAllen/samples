@@ -129,3 +129,5 @@ The bake sale list is coming together.  Looking at the sheet, Betty decides that
 Congratulations! Betty's Bake Sale was well planned and went off without a hitch. You've now completed the walkthrough for creating and manipulating data in a sheet. Please feel free to contact us at api@smartsheet.com with any questions or suggestions.
 
 The Smartsheet Platform team.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)

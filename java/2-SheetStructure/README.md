@@ -98,3 +98,5 @@ Betty is pleased with the outcome - not only she is able to track the project it
 Congratulations!  You just completed your second Smartsheet API Java walkthrough.  We encourage you to play with the app, change it around, and enhance it to get better acquainted with the Smartsheet API.  Ping us at api@smartsheet.com with any questions or suggestions.
 
 The Smartsheet Platform team. 
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)

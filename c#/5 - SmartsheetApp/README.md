@@ -156,3 +156,5 @@ These variables are stored to the ViewBag so they can be displayed in the HelloS
 Congratulations! You just completed your fifth Smartsheet API C# walkthrough. We encourage you to play with the app, change it around, and enhance it to get better acquainted with the Smartsheet API. Ping us at api@smartsheet.com with any questions or suggestions.
 
 The Smartsheet Platform team.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)

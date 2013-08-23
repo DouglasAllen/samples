@@ -89,3 +89,5 @@ Deleting an attachment is easy - just change the request method to DELETE (all c
 Congratulations! You just completed your third Smartsheet API Python walkthrough. We encourage you to play with the script, change it around, and enhance it to get better acquainted with the Smartsheet API. For more information, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers). Also, feel free to contact us at api@smartsheet.com with any questions or suggestions. 
 
 The Smartsheet Platform team. 
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)

@@ -61,3 +61,5 @@ If you refresh the list of users, you should see that the one you just removed i
 Congratulations!  You just completed your fourth Smartsheet API Ruby walkthrough.  We encourage you to play with the script, change it around, and enhance it to get better acquainted with the Smartsheet API.  Ping us at api@smartsheet.com with any questions or suggestions.
 
 The Smartsheet Platform team. 
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)
