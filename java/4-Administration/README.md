@@ -9,11 +9,12 @@ Familiarize yourself with the Smartsheet API. For information on the Smartsheet 
 Dependencies
 ---
 This script has been tested with Java 7.
-You must also include the Jackson JSON parser jars, found here: http://wiki.fasterxml.com/JacksonHome. This has been tested with version 2.2.0.
+You must also include the Jackson JSON parser jars, found here: [http://wiki.fasterxml.com/JacksonHome](http://wiki.fasterxml.com/). This has been tested with version 2.2.0.
 
-To run, cd to the folder where AdminExample.java is:
-	javac -classpath [folder with Jackson jars] AdminExample.java
-	java -classpath [folder with Jackson jars];. AdminExample
+To run, cd to the folder where AdminExample.java is located and then run the following commands:
+		
+		javac -classpath [folder with Jackson jars] AdminExample.java
+		java -classpath [folder with Jackson jars];. AdminExample
 	
 Usage
 ---

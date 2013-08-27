@@ -65,7 +65,7 @@ public class HelloSmartsheet {
 				response.append(line);
 			}
 			reader.close();
-			//Use Jackson to conver the JSON string to a List of Sheets
+			//Use Jackson to convert the JSON string to a List of Sheets
 			List<Sheet> sheets = mapper.readValue(response.toString(), new TypeReference<List<Sheet>>() {});
 			if (sheets.size() == 0) {
 				System.out.println("You don't have any sheets.  Goodbye!");

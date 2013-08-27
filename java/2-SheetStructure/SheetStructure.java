@@ -92,7 +92,7 @@ public class SheetStructure {
 			
 			//Now add a column:
 			String columnName = "Delivery Date";
-			System.out.println("Adding a column " + columnName + " to " + sheetName);
+			System.out.println("Adding column " + columnName + " to " + sheetName);
 			Column newColumn = new Column(columnName, "DATE", 5);
 			
 			connection = (HttpURLConnection) new URL(SHEET_COLUMNS_URL.replace(ID, ""+newSheet.getId())).openConnection();
@@ -198,7 +198,7 @@ public class SheetStructure {
 			
 			
 			//Move Delivered rows to be children of the last spacer row.
-			System.out.println("Moving delivered rows to to Delivered...");
+			System.out.println("Moving delivered rows to Delivered section...");
 			Long[] deliveredRowIds = new Long[]{newRowsResult.result.get(1).getId(), newRowsResult.result.get(4).getId()};
 			RowWrapper parentRowLocation = new RowWrapper();
 			parentRowLocation.setParentId(spacerRowsResult.getResult().get(1).getId());
