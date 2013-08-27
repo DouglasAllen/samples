@@ -77,7 +77,7 @@ Betty realizes that a few of the items have already been delivered.  It would be
 	
 As more people volunteer, Betty keeps adding new baked goods to the list as siblings of existing items (using the <code>siblingId</code>).
 
-The bake sale list is coming together.  Looking at the sheet, Betty decides that the "Status" column ought to be moved up (to index 1)to make it easier to identify delinquent items:
+The bake sale list is coming together.  Looking at the sheet, Betty decides that the "Status" column ought to be moved up (to index 1) to make it easier to identify delinquent items:
 
 	[…] 
     sheetId: sheet_id,
