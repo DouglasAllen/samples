@@ -4,7 +4,7 @@ See our Hellosmartsheet interactive script for a basic introduction to the Smart
 
 Smartsheet API
 ---
-Familiarize yourself with the Smartsheet API. For information on the Smartsheet APi, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers).
+Familiarize yourself with the Smartsheet API. For information on the Smartsheet API, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers).
 
 Dependencies
 ---
