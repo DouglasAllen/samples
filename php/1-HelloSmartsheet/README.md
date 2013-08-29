@@ -65,4 +65,4 @@ Congratulations!  You just completed your first Smartsheet API PHP walkthrough. 
 
 The Smartsheet Platform team.
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples/php/1-HelloSmartsheet)
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)
