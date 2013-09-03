@@ -102,7 +102,7 @@ public class AdminExample {
 			
 			//Create a sheet as user1
 			newSheet = new Sheet();
-			newSheet.setName("Admin's Sheet");
+			newSheet.setName("User 1's Sheet");
 			newSheet.setColumns(Arrays.asList(
 					new Column("Column 1", 	"TEXT_NUMBER", 	null, 	true, 	null),
 					new Column("Column 2", 	"TEXT_NUMBER", null, 	null, 	null),
@@ -121,7 +121,7 @@ public class AdminExample {
 
 			//Create a sheet as user2
 			newSheet = new Sheet();
-			newSheet.setName("Admin's Sheet");
+			newSheet.setName("User 2's Sheet");
 			newSheet.setColumns(Arrays.asList(
 					new Column("Column 1", 	"TEXT_NUMBER", 	null, 	true, 	null),
 					new Column("Column 2", 	"TEXT_NUMBER", null, 	null, 	null),

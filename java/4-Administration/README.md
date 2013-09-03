@@ -22,7 +22,7 @@ Smartsheet has several subscription options, or plans, ranging from Basic to Ent
 
 To execute any admin operations, you must have (1) a multi-user plan, and (2) System Admin privileges to that account. See this help article [http://help.smartsheet.com/customer/portal/articles/520100-user-types](http://help.smartsheet.com/customer/portal/articles/520100-user-types) to learn about Smartsheet user types.
 
-While logged in as a SysAdmin of a Team or Enterprise account, generate a Smartsheet API access token and insert it into the Smartsheet Request class at the top of the script:
+While logged in as a SysAdmin of a Team or Enterprise account, [generate a Smartsheet API Access Token](http://www.smartsheet.com/developers/api-documentation#h.5osh0dl59e5m) and insert it into the Smartsheet Request class at the top of the script:
 
         String accessToken = "";
 
