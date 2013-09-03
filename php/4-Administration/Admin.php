@@ -30,9 +30,9 @@
     $usersSheetsURL = $usersURL ."/sheets";
 
     // Insert your Smartsheet API Token here
-    $accessToken = "54lvf438c959rdzu4qg8dszrw6";
-    $user1Email = "stmcallister+user1test11@gmail.com";
-    $user2Email = "stmcallister+user2test11@gmail.com";
+    $accessToken = "";
+    $user1Email = "";
+    $user2Email = "";
   
     // Create Headers Array for Curl
     $headers = array(

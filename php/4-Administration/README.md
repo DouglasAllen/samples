@@ -17,7 +17,7 @@ Smartsheet has several subscription options, or plans, ranging from Basic to Ent
 
 To execute any admin operations, you must be (1) a member of a multi-user plan, and (2) must have administrative privileges. See this help article [http://help.smartsheet.com/customer/portal/articles/520100-user-types](http://help.smartsheet.com/customer/portal/articles/520100-user-types) to learn about Smartsheet user types.
 
-As with the other scripts in this series of samples, to run the script you will first need to [generate a Smartsheet Access Token](http://www.smartsheet.com/developers/api-documentation#h.5osh0dl59e5m) and insert it into the script:
+As with the other scripts in this series of samples, to run the script you will first need to [generate a Smartsheet API Access Token](http://www.smartsheet.com/developers/api-documentation#h.5osh0dl59e5m) and insert it into the script:
 
 	// Insert your Smartsheet API Token here
     $accessToken = " ";
