@@ -27,7 +27,7 @@ You'll also need to set the email address for two users. Both Gmail and Hotmail 
 	$user1Email = "api-user+1@gmail.com";
     $user2Email = "api-user+2@gmail.com";
   
-When the script runs, You should receive two emails at youremail@gmail.com inviting User A and User B to join your Team account. Accept the invitation emails before continuing - this is a required step; without it, the invited users will not become associated with your Team account based on Smartsheet's opt-in model.
+When the script runs, You should receive two emails at api-user@gmail.com inviting User A and User B to join your Team account. Accept the invitation emails before continuing - this is a required step; without it, the invited users will not become associated with your Team account based on Smartsheet's opt-in model.
 
 Code
 ---
