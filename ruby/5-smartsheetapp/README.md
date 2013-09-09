@@ -3,9 +3,9 @@ Third-party app (Ruby/Rails)
 See our <b>Hellosmartsheet</b>, <b>SheetStructure</b>, <b>Attachments</b> and <b>Admin</b> scripts for a hands-on introduction to the Smartsheet API.  The fifth in the series, this sample third-party RoR app shows how to use OAuth 2.0 to authenticate with Smartsheet and access data in a Smartsheet account on behalf of a user.
 
 ##Smartsheet API
-Familiarize yourself with the Smartsheet API. For information on the Smartsheet APi, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers).
+Familiarize yourself with the Smartsheet API. For information on the Smartsheet API, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers).
 
-The Smartsheet API documentation has a detailed section on third-party applications which takes you step by step trough the Smartsheet OAuth 2.0 flow.  Please review it and familiarize yourself with the flow prior to implementing this example app.
+The Smartsheet API documentation has a detailed section on [third-party applications](http://www.smartsheet.com/developers/api-documentation#h.opcwlo3avvxk) which takes you step by step trough the Smartsheet OAuth 2.0 flow.  Please review it and familiarize yourself with the flow prior to implementing this example app.
 
 ## Notes and Caveats
 * This example app has been tested with Rails 4.0 only.
