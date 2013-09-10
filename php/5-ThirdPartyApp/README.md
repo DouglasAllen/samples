@@ -13,7 +13,6 @@ The Smartsheet API documentation has a detailed section on [third-party applicat
 
 What's not addressed in this walkthrough:
 
-* Devise integration.
 * Handling of the Smartsheet API rate limit.
 * Smartsheet refresh token management.
 
