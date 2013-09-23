@@ -68,7 +68,7 @@
 
 	$postfields = json_encode($theSheet);
 
-	// Connect to Smartsheet API to get Sheet List
+	// Connect to Smartsheet API to create sheet
 	$curlSession = curl_init($sheetsURL);
 	curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
 	curl_setopt($curlSession, CURLOPT_POST, 1);
@@ -121,6 +121,7 @@
     $postfields = json_encode($theWrapper);
     $rowsURL = str_replace('{{SHEETID}}', $theSheet->id, $rowsURL);
     
+    // Connect to Smartsheet API to add rows of data to the sheet
     $curlSession = curl_init($rowsURL);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curlSession, CURLOPT_POST, 1);
@@ -154,6 +155,7 @@
     array_pop($headers); // Remove json content-type from headers
     array_push($headers, 'Content-Disposition: attachment; filename="'. $filename .'"');
 
+    // Connect to Smartsheet API to post file attachment
     $curlSession = curl_init($rowAttachmentsURL);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);   
     curl_setopt($curlSession, CURLOPT_HEADER, true);   
@@ -203,6 +205,7 @@
     $getAttachmentURL = str_replace('{{ATTACHMENTID}}', $attachments[0]->id, $getAttachmentURL);
     $savePath = "savedSmartsheet.png";
 
+    // Connect to Smartsheet API to download file attachment
     $curlSession = curl_init($getAttachmentURL);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
@@ -239,6 +242,7 @@
     $postfields = json_encode($urlAttachment);
     $curlSession = curl_init($rowAttachmentsURL);
 
+    // Connect to Smartsheet API to attach URL
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);   
     curl_setopt($curlSession, CURLOPT_POST, 1);
     curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
@@ -259,7 +263,7 @@
         curl_close($curlSession); 
     }
 
-    // Delete attachment
+    // Connect to Smartsheet API to delete file attachment
     $curlSession = curl_init($getAttachmentURL);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);   
     curl_setopt($curlSession, CURLOPT_CUSTOMREQUEST, "DELETE");   
