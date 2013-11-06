@@ -9,9 +9,10 @@ Familiarize yourself with the Smartsheet API. For information on the Smartsheet 
 Dependencies
 ---
 This script has been tested with Java 7.
-You must also include the Jackson JSON parser jars, found here: http://wiki.fasterxml.com/JacksonHome. This has been tested with version 2.2.0.
+You must also include the [Jackson JSON parser jars](http://wiki.fasterxml.com/JacksonHome). This has been tested with version 2.2.0.
 
 To run, cd to the folder where HelloSmartsheet.java is:
+
 	javac -classpath [folder with Jackson jars] HelloSmartsheet2.java
 	java -classpath [folder with Jackson jars];. HelloSmartsheet2
 	

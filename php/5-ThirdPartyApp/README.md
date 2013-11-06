@@ -5,7 +5,7 @@ See our <b>Hellosmartsheet</b>, <b>SheetStructure</b>, <b>Attachments</b> and <b
 ##Smartsheet API
 Familiarize yourself with the Smartsheet API. For information on the Smartsheet API, please see the [Smartsheet Developer Portal](http://smartsheet.com/developers).
 
-The Smartsheet API documentation has a detailed section on [third-party applications](http://www.smartsheet.com/developers/api-documentation#h.opcwlo3avvxk) which takes you step by step trough the Smartsheet OAuth 2.0 flow.  Please review it and familiarize yourself with the flow prior to implementing this example app.
+The Smartsheet API documentation has a detailed section on [third-party applications](http://www.smartsheet.com/developers/api-documentation#h.opcwlo3avvxk) which takes you step by step through the Smartsheet OAuth 2.0 flow.  Please review it and familiarize yourself with the flow prior to implementing this example app.
 
 ## Notes and Caveats
 * This example app has been tested running 64-bit PHP version 5.3.15.

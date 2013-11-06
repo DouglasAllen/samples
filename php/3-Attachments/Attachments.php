@@ -86,7 +86,7 @@
         $theSheet->id = $createObj->result->id;
 
         // Tell the user!
-        echo "Woo hoo! Sheet ". $createObj->result->name ." created, id: ".  $theSheet->id ."\n"; 
+        echo "Woo hoo! Sheet '". $createObj->result->name ."' created, id: ".  $theSheet->id ."\n"; 
         
         // close curlSession 
         curl_close($curlSession); 
@@ -137,7 +137,7 @@
         $addRowsObj = json_decode($rowsResponse);
 
         // Inform the user
-        echo "Added ". count($addRowsObj->result) ." rows of data to ".  $theSheet->name ."\n\n"; 
+        echo "Added ". count($addRowsObj->result) ." rows of data to '".  $theSheet->name ."'\n\n"; 
         
         // close curlSession 
         curl_close($curlSession); 
@@ -191,7 +191,7 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $getAttachmentsResponse = curl_exec($curlSession);
-    
+
     if (curl_errno($curlSession)) { 
         print "Oh No! Error: " . curl_error($curlSession); 
     } else { 

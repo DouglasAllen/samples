@@ -24,7 +24,7 @@ This walkthrough highlights only some parts of the code.  For the full code, ple
 
 The goal of this walkthrough to help you understand how to attach files and URLs to data containers in Smartsheet, and then access these attachments.  In Smartsheet, users can attach files to workspaces (not supported via the API as of 2013 07 22), sheets, rows, and discussion comments. 
 
-<b>IMPORTANT</b>: Please note that as of this writing the Smartsheet API does not support multipart or chunked file upload. 
+<b>IMPORTANT</b>: Please note that as of this writing the Smartsheet API only supports file streaming upload and does not support multipart or chunked file upload. 
 
 First, create a sheet with a couple of rows so that we have something to work with.  Now that the rows are in place, let's upload a file to the top row.
 

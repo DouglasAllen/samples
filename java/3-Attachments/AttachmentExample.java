@@ -40,13 +40,14 @@ public class AttachmentExample {
 		String accessToken = "";//Insert your access token here.
 		
 		try {
-			
+			System.out.println("Starting HelloSmartsheet3: Attachments...");
+
 			//Create A Sheet
 			Sheet newSheet = new Sheet();
 			newSheet.setName("Attachment Example");
 			newSheet.setColumns(Arrays.asList(
 					new Column("Column 1", 	"TEXT_NUMBER", 	null, 	true, 	null),
-					new Column("Column 2", 	"TEXT_NUMBER", null, 	null, 	null),
+					new Column("Column 2", 	"TEXT_NUMBER", 	null, 	null, 	null),
 					new Column("Column 3",	"TEXT_NUMBER", 	null, 	null, 	null)
 					));
 			connection = (HttpURLConnection) new URL(GET_SHEETS_URL).openConnection();
@@ -56,6 +57,7 @@ public class AttachmentExample {
 			mapper.writeValue(connection.getOutputStream(), newSheet);
 			Result<Sheet> newSheetResult = mapper.readValue(connection.getInputStream(), new TypeReference<Result<Sheet>>() {});
 			newSheet = newSheetResult.getResult();
+			System.out.println("Success! Sheet " + newSheet.getName() + " created, id: " + newSheet.getId());
 
 			//Add a row. This will be the row we attach the document to.
 			List<Row>rows = new ArrayList<Row>();
@@ -73,8 +75,10 @@ public class AttachmentExample {
 			connection.setDoOutput(true);
 			mapper.writeValue(connection.getOutputStream(), rowWrapper);
 			Result<List<Row>> newRowsResult = mapper.readValue(connection.getInputStream(), new TypeReference<Result<List<Row>>>() {});
-			
-			String pathToFile = "/SampleFile.pdf"; //Provide a path to a file here.
+			System.out.println("Added " + newRowsResult.getResult().size() + " rows of data to " + newSheet.getName());
+
+			String pathToFile = "SampleFile.pdf"; //Provide a path to a file here.
+			String downloadedPathToFile = "SampleFile-Downloaded.pdf";
 			File file = new File(pathToFile);
 			FileInputStream fis = new FileInputStream(file);
 			long fileSize = fis.getChannel().size();
@@ -88,17 +92,20 @@ public class AttachmentExample {
 			//Note that the SmartsheetAPI does not currently support Multi-part/chunked uploads.
 			copy(fis, connection.getOutputStream());
 			Result<Attachment> attachmentResult = mapper.readValue(connection.getInputStream(), new TypeReference<Result<Attachment>>() {});
-			
+			System.out.println("Attached " + file.getName() + " file to row " + newRowsResult.getResult().get(0).getId());
+
 			//get the Attachment, which will now have a short-lived url for downloading the actual file.
 			connection = (HttpURLConnection) new URL(ATTACHMENT_URL.replace(ID, ""+attachmentResult.getResult().getId())).openConnection();
 			connection.addRequestProperty("Authorization", "Bearer " + accessToken);
 			Attachment attachment = mapper.readValue(connection.getInputStream(), Attachment.class); 
 
 			//Now download the file.
-			FileOutputStream fos = new FileOutputStream("SampeFile-Dowloaded.pdf"); //Provide a path for the output file here
+			FileOutputStream fos = new FileOutputStream(downloadedPathToFile); //Provide a path for the output file here
 			connection = (HttpURLConnection) new URL(attachment.getUrl()).openConnection();
 			copy(connection.getInputStream(), fos);
 			fos.close();
+
+			System.out.println("File " + downloadedPathToFile + " downloaded and saved locally.");
 
 			//Attach a URL to a row
 			Attachment urlAttachment = new Attachment();
@@ -112,7 +119,7 @@ public class AttachmentExample {
 			connection.setDoOutput(true);
 			mapper.writeValue(connection.getOutputStream(), urlAttachment);
 			Result<Attachment> urlAttachmentResult = mapper.readValue(connection.getInputStream(), new TypeReference<Result<Attachment>>() {});
-			
+			System.out.println("Attached the " + urlAttachmentResult.getResult().getName() + " URL to row " + newRowsResult.getResult().get(0).getId());
 			//Now delete the attachment.
 			connection = (HttpURLConnection) new URL(ATTACHMENT_URL.replace(ID, ""+urlAttachmentResult.getResult().getId())).openConnection();
 			connection.addRequestProperty("Authorization", "Bearer " + accessToken);
@@ -120,7 +127,7 @@ public class AttachmentExample {
 			Result<Object> deleteResult = mapper.readValue(connection.getInputStream(), new TypeReference<Result<Object>>(){});
 			System.out.println(deleteResult.getMessage());
 
-			
+			System.out.println("All done");
 			
 		} catch (IOException e) {
 			
