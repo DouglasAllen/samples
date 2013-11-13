@@ -13,19 +13,15 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-
-
-
-# Written in Python 2.7.3
-
-
+#
+#   Written in Python 2.7.5
 
 import urllib2
 import json
 
 API_URL = "https://api.smartsheet.com/1.1"
 
-token = " Bearer " + str(input("Enter Smartsheet API access token:")) #Get token from user, we're not validating any user input in this example
+token = " Bearer " + str(raw_input("Enter Smartsheet API access token:")) #Get token from user, we're not validating any user input in this example
 
 sheetURL = API_URL + "/sheets" 
 r = urllib2.Request(sheetURL) #Create request object
@@ -50,10 +46,8 @@ sheet_id = all_sheets[sheet_number-1]['id'] #Gets sheet id from response object
 
 shareURL = API_URL +'/sheet/' + str(sheet_id) + '/shares?sendEmail=true' #URL used to share a sheet
 
-shareTo = str(input("Enter an email address to share {} to:".format(sheet_name))) 
-print "Choose an access level (VIEWER, EDITOR, EDITOR_SHARE, ADMIN) for {}:".format(shareTo)
-
-accessLevel = str(input())
+shareTo = str(raw_input("Enter an email address to share {} to:".format(sheet_name))) 
+accessLevel = str(raw_input("Choose an access level (VIEWER, EDITOR, EDITOR_SHARE, ADMIN) for {}:".format(shareTo)))
 
 print "Sharing {} to {} as {}.".format(sheet_name, shareTo, accessLevel)
 
