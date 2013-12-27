@@ -29,7 +29,7 @@
 	$handle = fopen ("php://stdin","r");
 	$inputToken = trim(fgets($handle));
 
-	if($inputToken != ""){
+	if ($inputToken != "") {
 		// Create Headers Array for Curl
 		$headers = array(
 			"Authorization: Bearer " .$inputToken
@@ -41,81 +41,82 @@
 		curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
 		$smartsheetData = curl_exec($curlSession);
+        		// Assign response to PHP object 
+        		$sheetsObj = json_decode($smartsheetData);
 
-		if (curl_errno($curlSession)) { 
-            		print "Oh No! Error: " . curl_error($curlSession); 
+		if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {	
+            		echo "Oh No! Could not grab sheets. Error: (". $sheetsObj->errorCode .") ". $sheetsObj->message ."\n"; 
         		} else { 
-            		// Assign response to PHP object 
-            		$sheetsObj = json_decode($smartsheetData);
-
 	            	// close curlSession 
 	           	curl_close($curlSession); 
-	        	}
 
-		// List Sheets
-    		if(count($sheetsObj) > 0){    		
-		    	$i = 1;
+			// List Sheets
+	    		if (count($sheetsObj) > 0) {    		
+			    	$i = 1;
 
-	    		// Output numbered list of sheets
-	    		foreach ($sheetsObj as $sheet){
-				echo $i++ .": ". $sheet->name ."\n";
-			}
+		    		// Output numbered list of sheets
+		    		foreach ($sheetsObj as $sheet){
+					echo $i++ .": ". $sheet->name ."\n";
+				}
 
-			// Output total number of sheets
-			echo "\nTotal Sheets: ". count($sheetsObj) ."\n\n";
+				// Output total number of sheets
+				echo "\nTotal Sheets: ". count($sheetsObj) ."\n\n";
 
-			// Prompt user to select a sheet to share
-			echo "Enter the number of the sheet you wish to share: ";
-			$handle = fopen ("php://stdin","r");
-			$inputSheetNum = trim(fgets($handle));
+				// Prompt user to select a sheet to share
+				echo "Enter the number of the sheet you wish to share: ";
+				$handle = fopen ("php://stdin","r");
+				$inputSheetNum = trim(fgets($handle));
 
-			// Set chosenSheet object
-			$chosenSheet = $sheetsObj[$inputSheetNum-1];
+				// Set chosenSheet object
+				$chosenSheet = $sheetsObj[$inputSheetNum-1];
 
-			// Prompt user to enter email address of person to share sheet with
-			echo "Enter an email address to share ". $chosenSheet->name ." to: ";
-			$handle = fopen ("php://stdin","r");
-			$inputEmail = trim(fgets($handle));
+				// Prompt user to enter email address of person to share sheet with
+				echo "Enter an email address to share ". $chosenSheet->name ." to: ";
+				$handle = fopen ("php://stdin","r");
+				$inputEmail = trim(fgets($handle));
 
-			// Prompt user to enter the access level the person has on shared sheet
-			echo "Choose an access level (VIEWER, EDITOR, EDITOR_SHARE, ADMIN) for ". $inputEmail ." to: ";
-			$handle = fopen ("php://stdin","r");
-			$inputAccessLevel = trim(fgets($handle));
+				// Prompt user to enter the access level the person has on shared sheet
+				echo "Choose an access level (VIEWER, EDITOR, EDITOR_SHARE, ADMIN) for ". $inputEmail ." to: ";
+				$handle = fopen ("php://stdin","r");
+				$inputAccessLevel = trim(fgets($handle));
 
-			echo "\nSharing ". $chosenSheet->name ." to ". $inputEmail ." as ". $inputAccessLevel .".\n\n";
+				echo "\nSharing ". $chosenSheet->name ." to ". $inputEmail ." as ". $inputAccessLevel .".\n\n";
 
-			// Assign values to postfields variable
-			$postfields = '{"email":"' .$inputEmail. '","accessLevel":"' .$inputAccessLevel. '"}';
+				// Assign values to postfields variable
+				$postfields = '{"email":"' .$inputEmail. '","accessLevel":"' .$inputAccessLevel. '"}';
 
-			// Call Smartsheet API to share sheet
-			$shareSheetURL = str_replace('{{SHEETID}}', $chosenSheet->id, $shareSheetURL); 
+				// Call Smartsheet API to share sheet
+				$shareSheetURL = str_replace('{{SHEETID}}', $chosenSheet->id, $shareSheetURL); 
 
-			array_push($headers, "Content-Type: application/json");
-			array_push($headers, "Content-Length: ". strlen($postfields));
+				array_push($headers, "Content-Type: application/json");
+				array_push($headers, "Content-Length: ". strlen($postfields));
 
-			// Connect to Smartsheet API to get Sheet List
-			$curlSession = curl_init($shareSheetURL);
-			curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
-			curl_setopt($curlSession, CURLOPT_POST, 1);
-			curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
-			curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
+				// Connect to Smartsheet API to get Sheet List
+				$curlSession = curl_init($shareSheetURL);
+				curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
+				curl_setopt($curlSession, CURLOPT_POST, 1);
+				curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
+				curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
-			$shareResponseData = curl_exec($curlSession);
-
-			if (curl_errno($curlSession)) { 
-            			print "Whoops! Error: " . curl_error($curlSession); 
-        			} else { 
+				$shareResponseData = curl_exec($curlSession);
             			// Assign response to variable 
             			$shareObj = json_decode($shareResponseData);
 
-			            echo "Sheet shared successfully, share ID ". $shareObj->result->id ."\n\n";
-			            echo "Have a nice day!\n\n";
-            
-		            	// close curlSession 
-		            	curl_close($curlSession); 
-		        	}
-		} else {		
-			echo "No sheets for you! Goodbye!\n\n";
-		}
+				if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {	
+	            			echo "Whoops! The following error occured, and the sheet was not shared.\n"; 
+	            			echo "Error: (". $shareObj->errorCode .") ". $shareObj->message ."\n"; 
+	        			} else { 
+
+				            echo "Sheet shared successfully, share ID ". $shareObj->result->id ."\n\n";
+				            echo "Have a nice day!\n\n";
+	            
+			            	// close curlSession 
+			            	curl_close($curlSession); 
+			        	}
+			} else {		
+				echo "No sheets for you!";
+			}
+	        	}
+		echo "Goodbye!\n\n";
     	}
 ?>

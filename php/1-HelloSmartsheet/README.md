@@ -61,7 +61,9 @@ Finally, share the sheet:
 	curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
 	$shareResponseData = curl_exec($curlSession);	
-Congratulations!  You just completed your first Smartsheet API PHP walkthrough.  We encourage you to play with the script, change it around, and enhance it to get better acquainted with the Smartsheet API.  Ping us at api@smartsheet.com with any questions or suggestions.
+Congratulations!  You just completed your first Smartsheet API PHP walkthrough.  We encourage you to play with the script, change it around, and enhance it to get better acquainted with the Smartsheet API.  
+
+If you have any questions or suggestions about this document, the application, or about the Smartsheet API in general please contact us at api@smartsheet.com. Development questions can also be posted to [Stackoverflow](http://stackoverflow.com/) with the tag [smartsheet-api](http://stackoverflow.com/questions/tagged/smartsheet-api).
 
 The Smartsheet Platform team.
 
