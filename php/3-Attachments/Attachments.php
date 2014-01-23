@@ -1,96 +1,101 @@
 <?php
-	/**
-	Copyright 2013 Smartsheet, Inc.
+    /**
+    Copyright 2013 Smartsheet, Inc.
 
-	   Licensed under the Apache License, Version 2.0 (the "License");
-	   you may not use this file except in compliance with the License.
-	   You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-	       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-	   Unless required by applicable law or agreed to in writing, software
-	   distributed under the License is distributed on an "AS IS" BASIS,
-	   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	   See the License for the specific language governing permissions and
-	   limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
-                    NOTE: This sample is for 64-bit PHP. To make this compatible with 32-bit
-			change ids to Strings. 
+            NOTE: This sample is for 64-bit PHP. To make this compatible with 32-bit
+    change ids to Strings. 
 
-                    NOTE: for simplicity, error handling and input validation has been neglected.
+            NOTE: for simplicity, error handling and input validation has been neglected.
 
-                    NOTE: Tested used PHP version 5.3.15
-	**/
+            NOTE: Tested used PHP version 5.3.15
+    **/
 
-	// Initialize URL Variables
-            $baseURL = "https://api.smartsheet.com/1.1";
-            $sheetsURL = $baseURL ."/sheets/";
-            $rowsURL = $baseURL. "/sheet/{{SHEETID}}/rows";
-            $rowAttachmentsURL = $baseURL. "/row/{{ROWID}}/attachments";
-            $getAttachmentURL = $baseURL ."/attachment/{{ATTACHMENTID}}";
+    // Initialize URL Variables
+    $baseURL = "https://api.smartsheet.com/1.1";
+    $sheetsURL = $baseURL ."/sheets/";
+    $rowsURL = $baseURL. "/sheet/{{SHEETID}}/rows";
+    $rowAttachmentsURL = $baseURL. "/row/{{ROWID}}/attachments";
+    $getAttachmentURL = $baseURL ."/attachment/{{ATTACHMENTID}}";
 
-            // Insert your Smartsheet API Token here
-	$accessToken = "";
-
-	// Create Headers Array for Curl
-	$headers = array(
-		"Authorization: Bearer ". $accessToken,
-		"Content-Type: application/json"
-	);
-
-            echo "Starting HelloSmartsheet3: Attachments...\n\n";
+    // Insert your Smartsheet API Token here
+    $accessToken = "";
     
-	// Create new sheet
-	$sheetName = "Attachment Example";
+    // Create Headers Array for Curl
+    $headers = array(
+    "Authorization: Bearer ". $accessToken,
+    "Content-Type: application/json"
+    );
 
-	$theSheet = new Sheet();
-	$theSheet->name = $sheetName;
+    echo "Starting HelloSmartsheet3: Attachments...\n\n";
 
-	$columns = array();
+    // Create new sheet
+    $sheetName = "Attachment Example";
 
-	$columnOne = new Column();
-	$columnOne->title = "Column 1";
-	$columnOne->type = "TEXT_NUMBER";
-	$columnOne->primary = true;
-	array_push($columns, $columnOne);
+    $theSheet = new Sheet();
+    $theSheet->name = $sheetName;
 
-	$columnTwo = new Column();
-	$columnTwo->title = "Column 2";
-	$columnTwo->type = "TEXT_NUMBER";
-	array_push($columns, $columnTwo);
+    $columns = array();
 
-	$columnThree = new Column();
-	$columnThree->title = "Column 3";
-	$columnThree->type = "TEXT_NUMBER";
-	array_push($columns, $columnThree);
+    $columnOne = new Column();
+    $columnOne->title = "Column 1";
+    $columnOne->type = "TEXT_NUMBER";
+    $columnOne->primary = true;
+    array_push($columns, $columnOne);
 
-	$theSheet->columns = $columns;
+    $columnTwo = new Column();
+    $columnTwo->title = "Column 2";
+    $columnTwo->type = "TEXT_NUMBER";
+    array_push($columns, $columnTwo);
 
-	$postfields = json_encode($theSheet);
+    $columnThree = new Column();
+    $columnThree->title = "Column 3";
+    $columnThree->type = "TEXT_NUMBER";
+    array_push($columns, $columnThree);
 
-	// Connect to Smartsheet API to create sheet
-	$curlSession = curl_init($sheetsURL);
-	curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($curlSession, CURLOPT_POST, 1);
-	curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
-	curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
+    $theSheet->columns = $columns;
 
-	$createResponse = curl_exec($curlSession);
+    $postfields = json_encode($theSheet);
 
-	if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    // Connect to Smartsheet API to create sheet
+    $curlSession = curl_init($sheetsURL);
+    curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curlSession, CURLOPT_POST, 1);
+    curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
+    curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
+
+    $createResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $createObj = json_decode($createResponse);
+
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        echo "Oh No! Could not create sheet. Error: (". $createObj->errorCode .") ". $createObj->message ."\n";
+        if ($createObj->errorCode == 1004) {
+            echo "You may want to check your access token.\n";
+        }
+        exit();
+        
     } else { 
-        // Assign response to variable 
-        $createObj = json_decode($createResponse);
-
         $theSheet->id = $createObj->result->id;
 
         // Tell the user!
         echo "Woo hoo! Sheet '". $createObj->result->name ."' created, id: ".  $theSheet->id ."\n"; 
-        
+
         // close curlSession 
         curl_close($curlSession); 
     }
+
     // Add a row to attach a document to
     $theRow = new Row();
     $rowCells = array();
@@ -129,13 +134,12 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $rowsResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $addRowsObj = json_decode($rowsResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        exit("Oh No! Could not add rows to sheet. Error: (". $addRowsObj->errorCode .") ". $addRowsObj->message ."\n");
     } else { 
-        // Assign response to variable 
-        $addRowsObj = json_decode($rowsResponse);
-
         // Inform the user
         echo "Added ". count($addRowsObj->result) ." rows of data to '".  $theSheet->name ."'\n\n"; 
         
@@ -167,13 +171,12 @@
     curl_setopt($curlSession, CURLOPT_CUSTOMREQUEST, "POST");
 
     $attachResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $attachObj = json_decode($attachResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        exit("Oh No! Could not attach file to sheet. Error: (". $attachObj->errorCode .") ". $attachObj->message ."\n");
     } else { 
-        // Assign response to variable 
-        $attachObj = json_decode($attachResponse);
-
         // Inform the user
         echo "Attached ". $filename ." file to row ". $addRowsObj->result[0]->id ."\n\n"; 
         
@@ -191,16 +194,15 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $getAttachmentsResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $attachments = json_decode($getAttachmentsResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
-    } else { 
-        // Assign response to variable 
-        $attachments = json_decode($getAttachmentsResponse);
-        
-        // close curlSession 
-        curl_close($curlSession); 
-    }
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        exit("Oh No! Could not get list of attachments. Error: (". $attachments->errorCode .") ". $attachments->message ."\n");
+    }   
+
+    // close curlSession 
+    curl_close($curlSession); 
 
     $getAttachmentURL = str_replace('{{ATTACHMENTID}}', $attachments[0]->id, $getAttachmentURL);
     $savePath = "savedSmartsheet.png";
@@ -211,13 +213,12 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $getAttachmentResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $getFileObj = json_decode($getAttachmentResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        echo "Oh No! Could not get attached file. Error: (". $getFileObj->errorCode .") ". $getFileObj->message ."\n";
     } else { 
-        // Assign response to variable 
-        $getFileObj = json_decode($getAttachmentResponse);
-
         $ch = curl_init($getFileObj->url);
         $localFile = fopen($savePath, 'wb');
         curl_setopt($ch, CURLOPT_FILE, $localFile);
@@ -249,12 +250,12 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $attachResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $attachObj = json_decode($attachResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        echo "Oh No! Could not attach URL. Error: (". $attachObj->errorCode .") ". $attachObj->message ."\n";
     } else { 
-        // Assign response to variable 
-        $attachObj = json_decode($attachResponse);
 
         // Inform the user
         echo "Attached the ". $urlAttachment->name ." URL to row ". $addRowsObj->result[0]->id ."\n\n"; 
@@ -270,12 +271,12 @@
     curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
     $deleteResponse = curl_exec($curlSession);
+    // Assign response to variable 
+    $deleteObj = json_decode($deleteResponse);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
+        echo "Oh No! Could not delete attachment. Error: (". $deleteObj->errorCode .") ". $deleteObj->message ."\n";
     } else { 
-        // Assign response to variable 
-        $deleteObj = json_decode($deleteResponse);
 
         // Inform the user
         echo "Attachment ". $attachObj->result->id ." deleted. \n"; 
