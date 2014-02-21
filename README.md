@@ -9,6 +9,7 @@ languages demonstrating the use and features of the Smartsheet API:
 3. Non-interactive CLI script showcaing attachment operations.
 4. Semi-interactive CLI script showcasing administrative functionality.
 5. Basic third-party app.
+6. Java SDK examples.
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)
 
