@@ -88,11 +88,19 @@
 
     $createResponse = curl_exec($curlSession);
 
-    if (curl_errno($curlSession)) { 
-        print "Oh No! Error: " . curl_error($curlSession); 
+    // Assign response to PHP object 
+    $createObj = json_decode($createResponse);
+
+    if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {    
+            
+    //if (curl_errno($curlSession)) { 
+        echo "Oh No! Could not create sheet.\n";
+        echo "Error: (". $createObj->errorCode .") ". $createObj->message ."\n"; 
+        exit;
+       // print "Oh No! Error: " . curl_error($curlSession); 
     } else { 
         // Assign response to variable 
-        $createObj = json_decode($createResponse);
+        //$createObj = json_decode($createResponse);
         $theSheet->id = $createObj->result->id;
 
         // Tell the user!
@@ -187,8 +195,8 @@
     $cellFive->columnId = $columnsObj[4]->id;
     array_push($rowOneCells, $cellFive);
 
-    $rownOne->cells = $rowOneCells;
-    array_push($rows, $rownOne);
+    $rowOne->cells = $rowOneCells;
+    array_push($rows, $rowOne);
 
     $rowTwo = new Row();
     $rowTwoCells = array();

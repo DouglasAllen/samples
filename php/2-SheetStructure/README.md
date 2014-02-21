@@ -1,6 +1,13 @@
 Sheet Structure: Betty's Bake Sale (PHP)
 ===
-See our <b>HelloSmartsheet</b> interactive script for a basic introduction to the Smartsheet API.  The second in the series, this non-interactive script walks you through the more advanced Smartsheet API calls and capabilities by creating a sheet from scratch, populating it with data, and finally changing the sheet structure by moving around rows and columns.
+This is a sample PHP script that demonstrates various actions that can be performed on a sheet with the Smarthseet API. See our <b>HelloSmartsheet</b> interactive script for a basic introduction to the Smartsheet API.  The second in the series, this non-interactive script walks you through the more advanced Smartsheet API calls. 
+
+The topics covered in this sample are:
+
+* creating a sheet from scratch
+* populating a sheet with data
+* moving rows 
+* moving columns
 
 Smartsheet API
 ---
