@@ -79,7 +79,7 @@
 
     $postfields = json_encode($theSheet);
 
-    // Connect to Smartsheet API to get Sheet List
+    // Connect to Smartsheet API to Create Sheet
     $curlSession = curl_init($sheetsURL);
     curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curlSession, CURLOPT_POST, 1);

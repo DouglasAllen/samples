@@ -91,7 +91,7 @@
 				array_push($headers, "Content-Type: application/json");
 				array_push($headers, "Content-Length: ". strlen($postfields));
 
-				// Connect to Smartsheet API to get Sheet List
+				// Connect to Smartsheet API to POST sheet collaborator
 				$curlSession = curl_init($shareSheetURL);
 				curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
 				curl_setopt($curlSession, CURLOPT_POST, 1);
