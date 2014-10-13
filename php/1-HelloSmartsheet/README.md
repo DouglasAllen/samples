@@ -1,6 +1,6 @@
 Hello Smartsheet (PHP)
 ===
-This is a simple introduction to the Smartsheet API for PHP developers.  Hello Smartsheet contains two interactive PHP Command Line Interface (CLI) scripts that each walk you through a basic Smartsheet API integration by establishing a connection and fetching a list of sheets. Then, in HelloSmartsheet.php you will share one of the sheets with a collaborator. And in HelloGetSheet.php you will view the contents of the sheet.
+This is a simple introduction to the Smartsheet API for PHP developers.  Hello Smartsheet contains two interactive PHP Command Line Interface (CLI) scripts that each walk you through a basic Smartsheet API integration by establishing a connection and fetching a list of sheets. Then, in [HelloSmartsheet.php](https://github.com/smartsheet-platform/samples/blob/master/php/1-HelloSmartsheet/HelloSmartsheet.php) you will share one of the sheets with a collaborator. And in [HelloGetSheet.php](https://github.com/smartsheet-platform/samples/blob/master/php/1-HelloSmartsheet/HelloGetSheet.php) you will view the contents of the sheet.
 
 Smartsheet API
 ---
