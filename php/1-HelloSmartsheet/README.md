@@ -1,6 +1,6 @@
 Hello Smartsheet (PHP)
 ===
-This is a simple introduction to the Smartsheet API for PHP developers.  Hello Smartsheet is an interactive PHP Command Line Interface (CLI) script that walks you through a basic Smartsheet API integration by establishing a connection, fetching a list of sheets, and sharing one of the sheets with a collaborator.
+This is a simple introduction to the Smartsheet API for PHP developers.  Hello Smartsheet contains two interactive PHP Command Line Interface (CLI) scripts that each walk you through a basic Smartsheet API integration by establishing a connection and fetching a list of sheets. Then, in HelloSmartsheet.php you will share one of the sheets with a collaborator. And in HelloGetSheet.php you will view the contents of the sheet.
 
 Smartsheet API
 ---
@@ -43,6 +43,8 @@ Fetch the list of your sheets:
 
 	$smartsheetData = curl_exec($curlSession);
 
+HelloSmartsheet.php
+---
 To share a sheet with a collaborator, set the right headers and specify the recipient and her desired access level:
 
 	array_push($headers, "Content-Type: application/json");
@@ -60,7 +62,36 @@ Finally, share the sheet:
 	curl_setopt($curlSession, CURLOPT_POSTFIELDS, $postfields);
 	curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
 
-	$shareResponseData = curl_exec($curlSession);	
+	$shareResponseData = curl_exec($curlSession);
+	
+HelloGetSheet.php
+---
+To view the contents of a sheet, set the right headers, and then loop over the structure of the sheet.
+
+	$curlSession = curl_init($getSheetURL);
+	curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, TRUE);
+
+	$getSheetResponseData = curl_exec($curlSession);
+    	// Assign response to variable 
+   	$sheetObj = json_decode($getSheetResponseData);
+
+
+	echo "\n";
+        echo "Sheet name: ". $sheetObj->name ."\n";
+        echo "Columns: " ;
+        foreach ($sheetObj->columns as $column) {
+    		echo $column->title ."\n";
+    	} 
+    	echo "\n";
+    	echo "Rows: ";
+    	foreach ($sheetObj->rows as $row) {
+    		foreach ($row->cells as $cell) {
+    			echo $cell->value .", ";
+    		}
+    		echo "\n";
+    	}
+
 Congratulations!  You just completed your first Smartsheet API PHP walkthrough.  We encourage you to play with the script, change it around, and enhance it to get better acquainted with the Smartsheet API.  
 
 If you have any questions or suggestions about this document, the application, or about the Smartsheet API in general please contact us at api@smartsheet.com. Development questions can also be posted to [Stackoverflow](http://stackoverflow.com/) with the tag [smartsheet-api](http://stackoverflow.com/questions/tagged/smartsheet-api).
