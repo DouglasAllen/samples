@@ -1,4 +1,4 @@
-##File Upload and Attachment: Domcumentation (Python)##
+##File Upload and Attachment: Documentation (Python)##
 ==========
 ####This script will walk you through the more advanced Smartsheet API calls and capabilities by attaching a file and a URL to a row, downloading a file attachment, and finally deleting a file attachment. For a more in-depth introduction to Smartsheet's API, see our `Hellomartsheet` and `Sheet Structure` walkthroughs. ####
 -------
