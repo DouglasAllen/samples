@@ -46,7 +46,7 @@
         		$sheetsObj = json_decode($smartsheetData);
 
 		if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {	
-            		echo "Oh No! Could not grab sheets. Error: (". $sheetsObj->errorCode .") ". $sheetsObj->message ."\n"; 
+            		echo "Oh No! Could not grab sheet list. Error: (". $sheetsObj->errorCode .") ". $sheetsObj->message ."\n"; 
         		} else { 
 	            	// close curlSession 
 	           	curl_close($curlSession); 
@@ -64,7 +64,7 @@
 				echo "\nTotal Sheets: ". count($sheetsObj) ."\n\n";
 
 				// Prompt user to select a sheet to share
-				echo "Enter the number of the sheet you wish to share: ";
+				echo "Enter the number of the sheet you wish to view: ";
 				$handle = fopen ("php://stdin","r");
 				$inputSheetNum = trim(fgets($handle));
 
@@ -85,7 +85,7 @@
             			$sheetObj = json_decode($getSheetResponseData);
 
 				if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {	
-	            			echo "Whoops! The following error occured, and the sheet was not shared.\n"; 
+	            			echo "Whoops! The following error occured.\n"; 
 	            			echo "Error: (". $sheetObj->errorCode .") ". $sheetObj->message ."\n"; 
 	        			} else { 
 	        				echo "\n";
