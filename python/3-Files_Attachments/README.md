@@ -1,4 +1,4 @@
-##File Upload and Attachment: Domcumentation (Python)##
+##File Upload and Attachment: Documentation (Python)##
 ==========
 ####This script will walk you through the more advanced Smartsheet API calls and capabilities by attaching a file and a URL to a row, downloading a file attachment, and finally deleting a file attachment. For a more in-depth introduction to Smartsheet's API, see our `Hellomartsheet` and `Sheet Structure` walkthroughs. ####
 -------
@@ -22,14 +22,14 @@ Find a file on your local computer to upload.
 ####HTTP Request Abstraction####
 I won't go into to much detail about how this works (you can see a more detailed explanation in `Sheet Structure`), but I did want to call attention to two pieces of the code. First, when uploading an attachment to Smartsheet extra headers are needed that specify the 'Content Disposition', 'Content Type' and 'Content Length.' I implemented this by taking in the headers as an array that I would iterate through and then add to the request object. 
 
-	    def _raw_request(self, url, extra_header = None, data = None, method = None):
-        request_url = self.baseURL + url
-        req = urllib2.Request(request_url)
-        req.add_header("Authorization", self.token)
+	def _raw_request(self, url, extra_header = None, data = None, method = None):
+		request_url = self.baseURL + url
+		req = urllib2.Request(request_url)
+		req.add_header("Authorization", self.token)
 
-        if extra_header:
-        	for i in extra_header:
-        		req.add_header(i[0], i[1])
+	if extra_header:
+		for i in extra_header:
+		req.add_header(i[0], i[1])
 
 Also, because urllib2 doesn't support the 'PUT' or 'DELETE' methods by default, I added those manually as well.
 
