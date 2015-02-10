@@ -1,6 +1,6 @@
 <?php
     /**
-    Copyright 2013 Smartsheet, Inc.
+    Copyright 2015 Smartsheet, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@
     $baseURL = "https://api.smartsheet.com/1.1";
     $sheetsURL = $baseURL ."/sheets/";
     $rowsURL = $baseURL. "/sheet/{{SHEETID}}/rows";
-    $rowAttachmentsURL = $baseURL. "/row/{{ROWID}}/attachments";
-    $getAttachmentURL = $baseURL ."/attachment/{{ATTACHMENTID}}";
+    $rowAttachmentsURL = $baseURL. "/sheet/{{SHEETID}}/row/{{ROWID}}/attachments";
+    $getAttachmentURL = $baseURL ."/sheet/{{SHEETID}}/attachment/{{ATTACHMENTID}}";
 
     // Insert your Smartsheet API Token here
-    $accessToken = "";
+    $accessToken = "54lvf438c959rdzu4qg8dszrw6";
     
     // Create Headers Array for Curl
     $headers = array(
@@ -153,8 +153,10 @@
 
     $fileStream = fopen($fileToAttach, 'r') or die($filename ."file won't open");
 
-    // Attach file
-    $rowAttachmentsURL = str_replace('{{ROWID}}', $addRowsObj->result[0]->id, $rowAttachmentsURL);
+    // Attach 
+    $rowAttachTags = array('{{ROWID}}', '{{SHEETID}}');
+    $rowAttachVals = array($addRowsObj->result[0]->id, $theSheet->id);
+    $rowAttachmentsURL = str_replace($rowAttachTags, $rowAttachVals, $rowAttachmentsURL);
 
     array_pop($headers); // Remove json content-type from headers
     array_push($headers, 'Content-Disposition: attachment; filename="'. $filename .'"');
@@ -203,8 +205,9 @@
 
     // close curlSession 
     curl_close($curlSession); 
-
-    $getAttachmentURL = str_replace('{{ATTACHMENTID}}', $attachments[0]->id, $getAttachmentURL);
+    $rowAttachTags = array('{{ROWID}}', '{{SHEETID}}','{{ATTACHMENTID}}');
+    $rowAttachVals = array($addRowsObj->result[0]->id, $theSheet->id,$attachments[0]->id);
+    $getAttachmentURL = str_replace($rowAttachTags, $rowAttachVals, $getAttachmentURL);
     $savePath = "savedSmartsheet.png";
 
     // Connect to Smartsheet API to download file attachment
