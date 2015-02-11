@@ -30,7 +30,7 @@
     $getAttachmentURL = $baseURL ."/sheet/{{SHEETID}}/attachment/{{ATTACHMENTID}}";
 
     // Insert your Smartsheet API Token here
-    $accessToken = "54lvf438c959rdzu4qg8dszrw6";
+    $accessToken = "";
     
     // Create Headers Array for Curl
     $headers = array(
