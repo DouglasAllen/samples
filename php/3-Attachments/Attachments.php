@@ -138,7 +138,7 @@
     $addRowsObj = json_decode($rowsResponse);
 
     if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
-        exit("Oh No! Could not add rows to sheet. Error: (". $addRowsObj->errorCode .") ". $addRowsObj->message ."\n");
+        exit("Oh No! Could not add rows to sheet. Error: (". $addRowsObj->errorCode .") ". $addRowsObj->message . "\n");
     } else { 
         // Inform the user
         echo "Added ". count($addRowsObj->result) ." rows of data to '".  $theSheet->name ."'\n\n"; 
@@ -177,7 +177,7 @@
     $attachObj = json_decode($attachResponse);
 
     if (curl_getinfo($curlSession, CURLINFO_HTTP_CODE) != 200) {
-        exit("Oh No! Could not attach file to sheet. Error: (". $attachObj->errorCode .") ". $attachObj->message ."\n");
+        exit("Oh No! Could not attach file to sheet. Error: ( code: ". curl_getinfo($curlSession, CURLINFO_HTTP_CODE) . ". error: ". $attachObj->errorCode .") ". $attachObj->message ."\n");
     } else { 
         // Inform the user
         echo "Attached ". $filename ." file to row ". $addRowsObj->result[0]->id ."\n\n"; 
