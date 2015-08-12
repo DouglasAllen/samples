@@ -14,7 +14,3 @@ This repository contains sample Smartsheet applications in several programming l
 In the meantime, please be aware that support for Smartsheet API 1.1 only runs through July 31, 2016, at which time it will no longer be supported and may stop functioning without any notice. 
 We strongly recommend using API 2.0 from this point forward, so that you can take advantage of the new features and functionality. 
 See the [API 2.0 Release Notes](https://www.smartsheet.com/blog/july-2015-api-v2-launch) for information about migrating your integration from API 1.1 to API 2.0. 
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/8682c8fc5c6618bcdad0698d2832b639 "githalytics.com")](http://githalytics.com/smartsheet-platform/samples)
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/smartsheet-platform/samples/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
